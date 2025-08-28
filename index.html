@@ -1,1 +1,437 @@
-Hello World
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendataan Minuman Beralkohol</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .golongan-section {
+            transition: all 0.3s ease;
+        }
+        .product-card {
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-yellow-400 to-red-0 to-green-500 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <img src="logo.png" alt="Logo" class="h-20 w-20 -5 object-contain">
+                <div class="flex items-center space-x-3">
+                    <!-- <i class="fas fa-wine-bottle text-3xl"></i> -->
+                    <h1 class="text-2xl font-bold text-center">Formulir Pendataan Minuman Beralkohol</h1>
+                </div>
+                <span id="input-date" class="text-sm font-semibold text-white"></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <form id="business-form" class="bg-white rounded-xl shadow-lg p-6 space-y-8">
+            <!-- Data Usaha -->
+            <div class="space-y-6">
+                <h2 class="text-xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2">
+                    <i class="fas fa-building mr-2 text-blue-600"></i>Data Usaha
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-store mr-1 text-blue-500"></i>Nama Usaha *
+                        </label>
+                        <input type="text" id="business-name" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Masukkan nama usaha">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-user-tie mr-1 text-blue-500"></i>Penanggungjawab *
+                        </label>
+                        <input type="text" id="responsible-person" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Masukkan nama penanggungjawab">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-map-marker-alt mr-1 text-blue-500"></i>Alamat *
+                    </label>
+                    <textarea id="address" required rows="3"
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                              placeholder="Masukkan alamat lengkap usaha"></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-file-contract mr-1 text-blue-500"></i>Izin Usaha (Upload File) *
+                        </label>
+                        <div class="flex items-center space-x-3">
+                            <input type="file" id="business-permit" required 
+                                   class="flex-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <span class="text-xs text-gray-500">PDF, JPG, PNG</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-phone mr-1 text-blue-500"></i>No. Telepon *
+                        </label>
+                        <input type="tel" id="phone-number" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Contoh: 081234567890">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Periode -->
+            <div class="space-y-6">
+                <h2 class="text-xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2">
+                    <i class="fas fa-calendar-alt mr-2 text-blue-600"></i>Periode
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-calendar mr-1 text-blue-500"></i>Pilih Periode *
+                        </label>
+                        <select id="periode" required 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">-- Pilih Bulan --</option>
+                            <option value="Januari">Januari</option>
+                            <option value="Februari">Februari</option>
+                            <option value="Maret">Maret</option>
+                            <option value="April">April</option>
+                            <option value="Mei">Mei</option>
+                            <option value="Juni">Juni</option>
+                            <option value="Juli">Juli</option>
+                            <option value="Agustus">Agustus</option>
+                            <option value="September">September</option>
+                            <option value="Oktober">Oktober</option>
+                            <option value="November">November</option>
+                            <option value="Desember">Desember</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            <i class="fas fa-calendar-check mr-1 text-blue-500"></i>Tahun *
+                        </label>
+                        <select id="tahun" required 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">-- Pilih Tahun --</option>
+                            <option value="2023">2023</option>
+                            <option value="2024" selected>2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kategori Golongan -->
+            <div class="space-y-6">
+                <h2 class="text-xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2">
+                    <i class="fas fa-tags mr-2 text-blue-600"></i>Kategori Golongan
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Golongan A -->
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center mb-3">
+                            <input type="checkbox" id="category-a" value="Gol. A" 
+                                   class="h-5 w-5 text-blue-600 focus:ring-blue-500"
+                                   onchange="toggleGolongan('a', this.checked)">
+                            <label for="category-a" class="ml-3 text-lg font-semibold text-gray-800">
+                                Golongan A
+                            </label>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">
+                            Minuman dengan kadar alkohol rendah (1-5%)
+                        </p>
+                        
+                        <div id="golongan-a-section" class="golongan-section hidden space-y-4">
+                            <div id="product-list-a" class="space-y-3"></div>
+                            <button type="button" onclick="addProduct('a')" 
+                                    class="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors">
+                                <i class="fas fa-plus mr-2"></i>Tambah Produk Gol. A
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Golongan B -->
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center mb-3">
+                            <input type="checkbox" id="category-b" value="Gol. B" 
+                                   class="h-5 w-5 text-blue-600 focus:ring-blue-500"
+                                   onchange="toggleGolongan('b', this.checked)">
+                            <label for="category-b" class="ml-3 text-lg font-semibold text-gray-800">
+                                Golongan B
+                            </label>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">
+                            Minuman dengan kadar alkohol sedang (5-20%)
+                        </p>
+                        
+                        <div id="golongan-b-section" class="golongan-section hidden space-y-4">
+                            <div id="product-list-b" class="space-y-3"></div>
+                            <button type="button" onclick="addProduct('b')" 
+                                    class="w-full bg-yellow-600 text-white py-2 px-4 rounded-lg hover:bg-yellow-700 transition-colors">
+                                <i class="fas fa-plus mr-2"></i>Tambah Produk Gol. B
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Golongan C -->
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center mb-3">
+                            <input type="checkbox" id="category-c" value="Gol. C" 
+                                   class="h-5 w-5 text-blue-600 focus:ring-blue-500"
+                                   onchange="toggleGolongan('c', this.checked)">
+                            <label for="category-c" class="ml-3 text-lg font-semibold text-gray-800">
+                                Golongan C
+                            </label>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">
+                            Minuman dengan kadar alkohol tinggi (>20%)
+                        </p>
+                        
+                        <div id="golongan-c-section" class="golongan-section hidden space-y-4">
+                            <div id="product-list-c" class="space-y-3"></div>
+                            <button type="button" onclick="addProduct('c')" 
+                                    class="w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors">
+                                <i class="fas fa-plus mr-2"></i>Tambah Produk Gol. C
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center pt-6 border-t border-gray-200">
+                <button type="submit" 
+                        class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-save mr-2"></i>Simpan Data
+                </button>
+            </div>
+
+        <div class="mt-8">
+            <h2 class="text-xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-4">
+                <i class="fas fa-list mr-2 text-blue-600"></i>Daftar Produk yang Sudah Diinput
+            </h2>
+            <div class="overflow-x-auto">
+                <table id="produk-table" class="min-w-full border border-gray-200 text-sm">
+                    <thead class="bg-gray-100 text-gray-700">
+                        <tr>
+                            <th class="px-4 py-2 border">Golongan</th>
+                            <th class="px-4 py-2 border">Nama Produk</th>
+                            <th class="px-4 py-2 border">Volume (ml)</th>
+                            <th class="px-4 py-2 border">Masuk</th>
+                            <th class="px-4 py-2 border">Tersedia</th>
+                            <th class="px-4 py-2 border">Terjual</th>
+                            <th class="px-4 py-2 border">Supplier</th>
+                        </tr>
+                    </thead>
+                    <tbody id="produk-table-body">
+                        <tr class="text-center text-gray-500">
+                            <td colspan="7" class="px-4 py-3">Belum ada produk diinput</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </form>
+        
+    </main>
+
+    <script>
+        // Set the current date in the header
+        document.getElementById('input-date').textContent = new Date().toLocaleDateString('id-ID');
+
+        // Set default period to current month
+        const currentDate = new Date();
+        const currentMonth = currentDate.toLocaleString('id-ID', { month: 'long' });
+        const currentYear = currentDate.getFullYear();
+        
+        document.getElementById('periode').value = currentMonth;
+        document.getElementById('tahun').value = currentYear;
+
+        // Toggle visibility golongan section
+        function toggleGolongan(golongan, isChecked) {
+            const section = document.getElementById(`golongan-${golongan}-section`);
+            if (isChecked) {
+                section.classList.remove('hidden');
+            } else {
+                section.classList.add('hidden');
+                // Clear products when unchecked
+                document.getElementById(`product-list-${golongan}`).innerHTML = '';
+            }
+        }
+
+        // Add product to specific golongan
+        function addProduct(golongan) {
+            const productList = document.getElementById(`product-list-${golongan}`);
+            const productIndex = productList.children.length;
+            const bulanSekarang = new Date().toLocaleString('id-ID', { month: 'long', year: 'numeric' });
+
+            const productCard = document.createElement('div');
+            productCard.className = `product-card bg-white p-4 rounded-lg shadow-sm border-l-${getGolonganColor(golongan)}-500`;
+            
+            productCard.innerHTML = `
+                <div class="flex justify-between items-start mb-3">
+                    <h4 class="font-semibold text-gray-800">Produk ${productIndex + 1}</h4>
+                    <button type="button" onclick="removeProduct('${golongan}', this)" 
+                            class="text-red-500 hover:text-red-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nama Produk *</label>
+                        <input type="text" name="produk-${golongan}[]" required 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                               placeholder="Nama produk">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Volume (ml) *</label>
+                        <input type="number" name="volume-${golongan}[]" required 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                               placeholder="Volume dalam ml" min="1">
+                    </div>
+                </div>
+                
+                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm mb-1">Barang Masuk *</label>
+                        <input type="number" name="barang-masuk-${golongan}[]" min="0" 
+                            class="w-full px-3 py-2 border rounded-lg" 
+                            placeholder="Jumlah masuk" oninput="hitungTerjual(this)">
+                    </div>
+                    <div>
+                        <label class="block text-sm mb-1">Barang Tersedia *</label>
+                        <input type="number" name="tersedia-${golongan}[]" min="0" 
+                            class="w-full px-3 py-2 border rounded-lg" 
+                            placeholder="Jumlah tersedia" oninput="hitungTerjual(this)">
+                    </div>
+                    <div>
+                        <label class="block text-sm mb-1">Barang Terjual</label>
+                        <input type="number" name="terjual-${golongan}[]" readonly 
+                            class="w-full px-3 py-2 bg-gray-100 border rounded-lg barang-terjual" placeholder="Jumlah Terjual">
+                    </div>
+                </div>
+                
+                <div class="mt-3">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Pemasok/Supplier *</label>
+                    <input type="text" name="supplier-${golongan}[]" required 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                           placeholder="Nama pemasok">
+                </div>
+
+                <input type="hidden" name="tanggal-input-${golongan}[]" value="${new Date().toLocaleDateString('id-ID')}">
+                <input type="hidden" name="periode-${golongan}[]" value="${document.getElementById('periode').value} ${document.getElementById('tahun').value}">
+            `;
+
+            productList.appendChild(productCard);
+        }
+
+        // Remove product
+        function removeProduct(golongan, button) {
+            const productCard = button.closest('.product-card');
+            productCard.remove();
+        }
+
+        // Calculate terjual automatically
+        function hitungTerjual(input) {
+            const card = input.closest('.product-card');
+            if (!card) return;
+
+            const parts = input.name.split('-');
+            const golongan = parts[parts.length - 1].replace('[]','');
+
+            const masuk = parseInt(card.querySelector(`input[name="barang-masuk-${golongan}[]"]`)?.value) || 0;
+            const tersedia = parseInt(card.querySelector(`input[name="tersedia-${golongan}[]"]`)?.value) || 0;
+            const terjualInput = card.querySelector('.barang-terjual');
+
+            if (terjualInput) {
+                terjualInput.value = Math.max(0, masuk - tersedia);
+            }
+        }
+
+        // Get color based on golongan
+        function getGolonganColor(golongan) {
+            const colors = { a: 'green', b: 'yellow', c: 'red' };
+            return colors[golongan] || 'blue';
+        }
+
+        document.getElementById('business-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const periode = document.getElementById('periode').value;
+    const tahun = document.getElementById('tahun').value;
+
+    if (!periode || !tahun) {
+        alert('Harap pilih periode dan tahun!');
+        return;
+    }
+
+    const golonganA = document.getElementById('category-a').checked;
+    const golonganB = document.getElementById('category-b').checked;
+    const golonganC = document.getElementById('category-c').checked;
+
+    if (!golonganA && !golonganB && !golonganC) {
+        alert('Pilih minimal satu kategori golongan!');
+        return;
+    }
+
+    // kosongkan tabel sebelum isi ulang
+    const tbody = document.getElementById('produk-table-body');
+    tbody.innerHTML = '';
+
+    // fungsi bantu untuk ambil produk per golongan
+    function ambilProduk(golongan, namaGolongan) {
+        const list = document.querySelectorAll(`#product-list-${golongan} .product-card`);
+        list.forEach(card => {
+            const namaProduk = card.querySelector(`input[name="produk-${golongan}[]"]`).value;
+            const volume = card.querySelector(`input[name="volume-${golongan}[]"]`).value;
+            const masuk = card.querySelector(`input[name="barang-masuk-${golongan}[]"]`).value;
+            const tersedia = card.querySelector(`input[name="tersedia-${golongan}[]"]`).value;
+            const terjual = card.querySelector(`input[name="terjual-${golongan}[]"]`).value;
+            const supplier = card.querySelector(`input[name="supplier-${golongan}[]"]`).value;
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="border px-4 py-2">${namaGolongan}</td>
+                <td class="border px-4 py-2">${namaProduk}</td>
+                <td class="border px-4 py-2">${volume}</td>
+                <td class="border px-4 py-2">${masuk}</td>
+                <td class="border px-4 py-2">${tersedia}</td>
+                <td class="border px-4 py-2">${terjual}</td>
+                <td class="border px-4 py-2">${supplier}</td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    if (golonganA) ambilProduk('a', 'Golongan A');
+    if (golonganB) ambilProduk('b', 'Golongan B');
+    if (golonganC) ambilProduk('c', 'Golongan C');
+
+    alert('Data berhasil disimpan dan tabel diperbarui!');
+});
+
+</script>
