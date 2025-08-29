@@ -232,6 +232,10 @@
             <h2 class="text-xl font-bold text-gray-800 border-b-2 border-blue-200 pb-2 mb-4">
                 <i class="fas fa-list mr-2 text-blue-600"></i>Daftar Produk yang Sudah Diinput
             </h2>
+            <button onclick="kirimData()" 
+                class="bg-blue-600 text-white px-4 py-1 rounded-lg hover:bg-green-700 transition shadow">
+          <i class="fas fa-paper-plane mr-1"></i>Kirim Data
+        </button>
             <div class="overflow-x-auto">
                 <table id="produk-table" class="min-w-full border border-gray-200 text-sm">
                     <thead class="bg-gray-100 text-gray-700">
@@ -433,5 +437,68 @@
 
     alert('Data berhasil disimpan dan tabel diperbarui!');
 });
+
+function kirimData() {
+      // Data usaha
+      const usaha = {
+        nama: document.getElementById("business-name").value.trim(),
+        penanggungJawab: document.getElementById("responsible-person").value.trim(),
+        alamat: document.getElementById("address").value.trim(),
+        telepon: document.getElementById("phone-number").value.trim(),
+        izinUsaha: document.getElementById("business-permit").files[0] 
+                    ? document.getElementById("business-permit").files[0].name 
+                    : null,
+        periode: document.getElementById("periode").value,
+        tahun: document.getElementById("tahun").value
+      };
+
+      if (!usaha.nama || !usaha.penanggungJawab || !usaha.alamat || !usaha.telepon || !usaha.izinUsaha) {
+        alert("Harap lengkapi data usaha sebelum mengirim!");
+        return;
+      }
+
+      // Data produk
+      const table = document.getElementById("produk-table-body");
+      const rows = table.querySelectorAll("tr");
+      let dataProduk = [];
+
+      rows.forEach(row => {
+        const cells = row.querySelectorAll("td");
+        if (cells.length === 7) {
+          dataProduk.push({
+            golongan: cells[0].innerText.trim(),
+            namaProduk: cells[1].innerText.trim(),
+            volume: cells[2].innerText.trim(),
+            masuk: cells[3].innerText.trim(),
+            tersedia: cells[4].innerText.trim(),
+            terjual: cells[5].innerText.trim(),
+            supplier: cells[6].innerText.trim()
+          });
+        }
+      });
+
+      if (dataProduk.length === 0) {
+        alert("Belum ada produk yang bisa dikirim!");
+        return;
+      }
+
+      // Buat payload
+  const payload = { usaha: usaha, produk: dataProduk };
+
+  // Kirim ke Google Sheets
+  fetch("https://script.google.com/macros/s/AKfycby1jkWM2p7LPok_dqpQbVVAt8A06UW0x5CkwcB1j4GOTK6ESP1dIJiacyL8nmhKKMXSxA/exec", {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: { "Content-Type": "application/json" }
+  })
+  .then(res => res.text())
+  .then(msg => {
+    alert("Data berhasil dikirim ke Admin!");
+  })
+  .catch(err => {
+    console.error("Error:", err);
+    alert("Gagal mengirim data!");
+  });
+}
 
 </script>
